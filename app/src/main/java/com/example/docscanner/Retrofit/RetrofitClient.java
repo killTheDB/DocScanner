@@ -5,9 +5,11 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitClient {
     private static Retrofit retrofitclient = null;
-    private static Retrofit getClient(){
+
+    public static Retrofit getClient(){
         if(retrofitclient == null){
-            retrofitclient = new Retrofit.Builder().baseUrl("http://").addConverterFactory(ScalarsConverterFactory.create()).build();
+            retrofitclient = new Retrofit.Builder().baseUrl("http://54.167.216.49:80")
+                    .addConverterFactory(ScalarsConverterFactory.create()).build();
         }
         return retrofitclient;
     }
