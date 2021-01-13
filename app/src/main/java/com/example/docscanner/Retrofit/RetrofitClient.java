@@ -8,7 +8,7 @@ public class RetrofitClient {
 
     public static Retrofit getClient(){
         if(retrofitclient == null){
-            retrofitclient = new Retrofit.Builder().baseUrl("http://54.167.216.49:80")
+            retrofitclient = new Retrofit.Builder().baseUrl("http://54.167.216.49")
                     .addConverterFactory(ScalarsConverterFactory.create()).build();
         }
         return retrofitclient;

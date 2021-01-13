@@ -64,7 +64,7 @@ public class ScanActivity extends AppCompatActivity implements IUploadCallbacks 
     private void uploadFile(){
         Toast.makeText(ScanActivity.this, "Test1", Toast.LENGTH_SHORT).show();
         if(selectedFileUri != null){
-            Toast.makeText(ScanActivity.this, "Test2", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ScanActivity.this, "Test2", Toast.LENGTH_SHORT).show();
             dialog = new ProgressDialog(ScanActivity.this);
             dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             dialog.setMessage("Uploading....");
@@ -75,11 +75,14 @@ public class ScanActivity extends AppCompatActivity implements IUploadCallbacks 
 
             File file = null;
             try {
+
                 file = new File(Common.getFilePath(this,selectedFileUri));
             }
             catch (URISyntaxException e){
+                Toast.makeText(ScanActivity.this, "Test2", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
+            Toast.makeText(ScanActivity.this, "Test2 "+file.toString(), Toast.LENGTH_SHORT).show();
             if(file != null){
                 final ProgressRequestBody requestBody =new ProgressRequestBody(this,file);
                 final MultipartBody.Part body = MultipartBody.Part.createFormData("image",file.getName(),requestBody);
@@ -90,10 +93,11 @@ public class ScanActivity extends AppCompatActivity implements IUploadCallbacks 
                                 .enqueue(new Callback<String>() {
                                     @Override
                                     public void onResponse(Call<String> call, Response<String> response) {
-                                        String image_processed_link = "http://54.167.216.49:80" +
+                                        String image_processed_link = "http://54.167.216.49/" +
                                                 response.body().replace("\"", "");
 
-                                        Toast.makeText(ScanActivity.this, "Please wait,Processing the Image", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ScanActivity.this, "Please wait,Processing the Image "+response.body(), Toast.LENGTH_SHORT).show();
+
 
                                         Picasso.get()
                                                 .load(image_processed_link)

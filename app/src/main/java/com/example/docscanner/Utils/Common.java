@@ -14,7 +14,7 @@ public class Common {
     public static String getFilePath(Context context, Uri uri) throws URISyntaxException {
         String selection = null;
         String[] selectionArgs = null;
-        if("contents".equalsIgnoreCase(uri.getScheme())){
+        if("content".equalsIgnoreCase(uri.getScheme())){
             String[] projection = {
                     MediaStore.Images.Media.DATA
             };
