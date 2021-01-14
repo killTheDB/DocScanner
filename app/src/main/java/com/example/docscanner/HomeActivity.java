@@ -10,19 +10,76 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity {
+    ListView lv_pdf;
+    public static ArrayList<File> filelist = new ArrayList<File>();
+    PDFAdapter obj_Adapter;
+    File dir;
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 9999;
     Uri imageUri;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        init();
     }
+
+    private void init() {
+        lv_pdf = (ListView)findViewById(R.id.lv_pdf);
+        dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"DocScannerStorage");
+        getfile(dir);
+
+        obj_Adapter = new PDFAdapter(getApplicationContext(),filelist);
+        lv_pdf.setAdapter(obj_Adapter);
+    }
+
+    private ArrayList<File> getfile(File dir) {
+        File listFile[] = dir.listFiles();
+        if(listFile != null && listFile.length > 0){
+            for(int i = 0;i < listFile.length;++i){
+                if(listFile[i].isDirectory()){
+                    getfile(listFile[i]);
+                }
+                else {
+                    boolean booleanpdf = false;
+                    if(listFile[i].getName().endsWith(".pdf")){
+                        for(int j = 0;j < filelist.size();++j){
+                            if(filelist.get(j).getName().equals(listFile[i].getName())){
+                                booleanpdf = true;
+                            }
+                        }
+                        if(booleanpdf){
+                            booleanpdf = false;
+                        }
+                        else {
+                            filelist.add(listFile[i]);
+                        }
+                    }
+                }
+            }
+        }
+        return filelist;
+    }
+
     public void check(View v){
 //        Toast.makeText(this, "working", Toast.LENGTH_SHORT).show();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){

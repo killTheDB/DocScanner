@@ -23,5 +23,26 @@
         android:onClick="upbutton"
         android:id="@+id/button_upload"/>
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/save"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_check_black_24dp"
+        android:visibility="invisible"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/cancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_cancel_black_24dp"
+        android:visibility="invisible"/>
+
 
 </RelativeLayout>
