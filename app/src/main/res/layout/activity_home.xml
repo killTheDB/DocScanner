@@ -15,7 +15,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:dividerHeight="5hp"/>
+        android:dividerHeight="5dp"/>
     <ImageView
         android:onClick="check"
         android:layout_width="70dp"
